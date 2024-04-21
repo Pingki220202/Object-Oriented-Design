@@ -1,0 +1,52 @@
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Interface representing a strategy for processing payments.
+ */
+abstract class PaymentMethod {
+    /**
+     * Processes a payment for a given amount.
+     *
+     * @param amount The total amount to be paid.
+     * @return The amount after processing the payment.
+     */
+    abstract double processPayment(double amount);
+}
+
+/**
+ * Concrete strategy for processing payments with a credit card.
+ */
+class CreditCardPayment extends PaymentMethod {
+    private String cardNumber;
+    private String expirationDate;
+    private String cvv;
+
+    /**
+     * Constructs a CreditCardPayment object with the specified card details.
+     *
+     * @param cardNumber     The credit card number.
+     * @param expirationDate The expiration date of the credit card.
+     * @param cvv            The CVV code of the credit card.
+     */
+    public CreditCardPayment(String cardNumber, String expirationDate, String cvv) {
+        this.cardNumber = cardNumber;
+        this.expirationDate = expirationDate;
+        this.cvv = cvv;
+    }
+
+    /**
+     * Processes a payment using a credit card.
+     *
+     * @param amount The total amount to be paid.
+     * @return The amount after processing the payment.
+     */
+    @Override
+    public double processPayment(double amount) {
+        // Simulate credit card processing
+        System.out.println("Processing credit card payment...");
+        // Assume processing fee of 2%
+        double processingFee = amount * 0.02;
+        return amount + processingFee;
+    }
+}
