@@ -1,60 +1,60 @@
 import java.util.ArrayList;
 import java.util.List;
 
-// Interface representing the ability to eat
-interface Eatable {
-    void eat();
+// Interface representing the ability to perform a task
+interface TaskPerformer {
+    void performTask();
 }
 
-// Interface representing the ability to cook
-interface Cookable {
-    void cook();
+// Interface representing the ability to supervise a task
+interface TaskSupervisor {
+    void superviseTask();
 }
 
-// Interface representing the ability to bake
-interface BakedGoods {
-    void bake();
+// Interface representing the ability to report on a task
+interface TaskReporter {
+    void reportTask();
 }
 
-// Class representing a Chef who can cook and bake
-class Chef implements Cookable, BakedGoods {
+// Class representing a Manager who can supervise and report on tasks
+class Manager implements TaskSupervisor, TaskReporter {
     @Override
-    public void cook() {
-        System.out.println("Chef is cooking.");
+    public void superviseTask() {
+        System.out.println("Manager is supervising.");
     }
 
     @Override
-    public void bake() {
-        System.out.println("Chef is baking.");
+    public void reportTask() {
+        System.out.println("Manager is reporting.");
     }
 }
 
-// Class representing a Baker who can bake
-class Baker implements BakedGoods {
+// Class representing a Worker who can perform tasks
+class Worker implements TaskPerformer {
     @Override
-    public void bake() {
-        System.out.println("Baker is baking.");
+    public void performTask() {
+        System.out.println("Worker is performing.");
     }
 }
 
-// Demo class demonstrating the usage of food-related roles and the Interface Segregation Principle
-public class Interface_Segregation_Principle_Food {
+// Demo class demonstrating the usage of task execution roles and the Interface Segregation Principle
+public class Interface_Segregation_Principle_Tasks {
     public static void main(String[] args) {
-        // Create a list of food-related roles
+        // Create a list of task execution roles
         List<Object> roles = new ArrayList<>();
-        roles.add(new Chef());
-        roles.add(new Baker());
+        roles.add(new Manager());
+        roles.add(new Worker());
 
         // Perform actions based on each role
         for (Object role : roles) {
-            if (role instanceof Cookable) {
-                ((Cookable) role).cook();
+            if (role instanceof TaskPerformer) {
+                ((TaskPerformer) role).performTask();
             }
-            if (role instanceof BakedGoods) {
-                ((BakedGoods) role).bake();
+            if (role instanceof TaskSupervisor) {
+                ((TaskSupervisor) role).superviseTask();
             }
-            if (role instanceof Eatable) {
-                ((Eatable) role).eat(); // Assume eating is a common action for all food-related roles
+            if (role instanceof TaskReporter) {
+                ((TaskReporter) role).reportTask(); // Assume reporting is a common action for all task execution roles
             }
             System.out.println();
         }
@@ -62,8 +62,8 @@ public class Interface_Segregation_Principle_Food {
 }
 
 /**
- * In the above program, we have interfaces representing specific food-related tasks,
- * such as cooking and baking, instead of a single interface containing all tasks.
- * This allows classes like Chef and Baker to implement only the interfaces relevant
+ * In the above program, we have interfaces representing specific task execution roles,
+ * such as performing and supervising tasks, instead of a single interface containing all tasks.
+ * This allows classes like Manager and Worker to implement only the interfaces relevant
  * to their roles, adhering to the Interface Segregation Principle.
  */
